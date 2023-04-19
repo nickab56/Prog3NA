@@ -11,6 +11,8 @@ public class Prog3NA
     private static PrintWriter outStream = null;
     private static Scanner inStream = null;
     
+    private static String tempToken;
+    
     
     public static void main(String[] args)    
     {
@@ -60,7 +62,7 @@ public class Prog3NA
     public static boolean Start(String token)
     {
         System.out.println("In Start");
-        if (encodeFile(token = ReadToken()))
+        if (encodeFile(token))
             if (lineFormat(token = ReadToken()))
                 if (encodeFormat(token = ReadToken()))
                     if (outputFile(token = ReadToken()))
@@ -90,33 +92,62 @@ public class Prog3NA
     public static boolean name(String token)
     {
         System.out.println("In name");
-        if (toekn
+        int i = token.length();
+        if (i == 1)
+        {
+            if (letter(token.charAt(0)))
+            {
+                System.out.println("name-success");
+                outStream.println("name-success");
+                return true;
+            }
+        }
+        else
+            {
+                int x = 0;
+                while (x < i)
+                {
+                    letter(token.charAt(x));
+                    x++;
+                }
+                System.out.println("name-success");
+                outStream.println("name-success");
+                return true;
+            }
         return false;
     }
     
     public static boolean lineFormat(String token)
     {
         System.out.println("In lineFormat");
-        if (lineFormatType(token = ReadToken()))
-            if(stmtTerminator(token = ReadToken()))
-            {
-                System.out.println("lineFormat-success");
-                outStream.println("lineFormat-success");
-                return true;
-            }
+        if (token.equals("line_format"))
+            if ((token = ReadToken()).equals("is"))
+                if (lineFormatType(token = ReadToken()))
+                {
+                    if(stmtTerminator(tempToken))
+                    {
+                        System.out.println("lineFormat-success");
+                        outStream.println("lineFormat-success");
+                        return true;
+                    }
+                }
         return false;
     }
     
     public static boolean encodeFormat(String token)
     {
-        System.out.println("In encodeFormat(String token");
-        if (encodeFormatType(token = ReadToken()))
-            if(stmtTerminator(token = ReadToken()))
-            {
-                System.out.println("encodeFormat-success");
-                outStream.println("encodeFormat-success");
-                return true;
-            }
+        System.out.println("In encodeFormat");
+        if (token.equals("encode_format"))
+            if((token = ReadToken()).equals("is"))
+                if (encodeFormatType(token = ReadToken()))
+                {
+                    if(stmtTerminator(tempToken))
+                    {
+                        System.out.println("encodeFormat-success");
+                        outStream.println("encodeFormat-success");
+                        return true;
+                    }
+                }
         return false;
     }
     
@@ -124,7 +155,6 @@ public class Prog3NA
     {
         System.out.println("In outputFile");
         if (name(token = ReadToken())){
-            System.out.println("about to check for '.'");
             if((token = ReadToken()).charAt(0) == '.')
                 if(name(token = ReadToken()))
                     if(stmtTerminator(token = ReadToken()))
@@ -139,8 +169,8 @@ public class Prog3NA
     
     public static boolean stmtTerminator(String token)
     {
-        System.out.println("In stmtTerminator");
-        if (token == "!")
+        System.out.println("In stmtTerminator");    
+        if (token.charAt(0) == '!')
         {
             System.out.println("stmtTerminator-success");
             outStream.println("stmtTerminator-success");
@@ -152,50 +182,110 @@ public class Prog3NA
     public static boolean lineFormatType(String token)
     {
         System.out.println("In lineFormatType");
-        if (token == "string" || token == "number")
+        if (token.equals("string") || token.equals("number"))
         {
-            System.out.println("lineFormatType-success");
-            outStream.println("lineFormatType-success");
-            return true;
+            if (lineFormatTypePrime(token = ReadToken()))
+            {
+                System.out.println("lineFormatType-success");
+                outStream.println("lineFormatType-success");
+                return true;
+            }
         }
         return false;
+    }
+    
+    
+    public static boolean lineFormatTypePrime(String token)
+    {
+        System.out.println("In lineFormatTypePrime");
+        tempToken = token;
+        if (token.charAt(0) == ',')
+        {
+            token = ReadToken();
+            if (token.equals("string") || token.equals("number"))
+            {
+                if(lineFormatTypePrime(token = ReadToken()))
+                {
+                    System.out.println("lineFormatTypePrime-success");
+                    outStream.println("lineFormatTypePrime-success");
+                    return true;
+                }
+            }
+        }
+        return true;
     }
     
     
     public static boolean encodeFormatType(String token)
     {
         System.out.println("In encodeFormatType");
+        if (token.equals("none"))
+        {
+            if (encodeFormatTypePrime(token = ReadToken()))
+                {
+                    System.out.println("encodeFormatType-success");
+                    outStream.println("encodeFormatType-success");
+                    return true;   
+                }
+        }
+        
         if (token.charAt(0) == '+' || token.charAt(0) == '-' || token.charAt(0) == '*')
         {
             if (digits(token = ReadToken()))
             {
-            System.out.println("encodeFormatType-success");
-            outStream.println("encodeFormatType-success");
-            return true;
+                if (encodeFormatTypePrime(token = ReadToken()))
+                {
+                    System.out.println("encodeFormatType-success");
+                    outStream.println("encodeFormatType-success");
+                    return true;
+                }
             }
         }
         return false;
+    }
+    
+    public static boolean encodeFormatTypePrime(String token)
+    {
+        tempToken = token;
+        if (token.charAt(0) == ',')
+            {
+                token = ReadToken();
+                if (token.charAt(0) == '+' || token.charAt(0) == '-' || token.charAt(0) == '*')
+                {
+                    if (digits(token = ReadToken()))
+                    {
+                        if (encodeFormatTypePrime(token = ReadToken()))
+                        {
+                            System.out.println("encodeFormatTypePrime-success");
+                            outStream.println("encodeFormatTypePrime-success");
+                            return true;
+                        }
+                    }
+                }
+            }
+        return true;
     }
     
     public static boolean digits(String token)
     {
         System.out.println("In digits");
         int i = token.length();
-        
         if (i == 1)
-            if (digit((token = ReadToken()).charAt(0)))
+        {
+            if (digit(token.charAt(0)))
             {
                 System.out.println("digits-success");
                 outStream.println("digits-success");
                 return true;
             }
+        }
         else
             {
                 int x = 0;
                 while (x < i)
                 {
-                    digit((token = ReadToken()).charAt(i));
-                    i--;
+                    digit((token.charAt(x)));
+                    x++;
                 }
                 return true;
             }

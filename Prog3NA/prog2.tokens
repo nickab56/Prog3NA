@@ -1,5 +1,7 @@
 encode_file
-input.txt
+input
+.
+txt
 !
 line_format
 is
@@ -25,5 +27,7 @@ none
 10
 !
 output_file
-encoded2_13_23.txt
+encoded2_13_23
+.
+txt
 !
