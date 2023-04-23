@@ -1,45 +1,172 @@
-letter-success
-letter-success
-letter-success
-letter-success
-letter-success
-name-success
-letter-success
-letter-success
-letter-success
-name-success
-stmtTerminator-success
-encodeFile-success
-lineFormatTypePrime-success
-lineFormatTypePrime-success
-lineFormatTypePrime-success
-lineFormatType-success
-stmtTerminator-success
-lineFormat-success
-digit-success
-digit-success
-digit-success
-digit-success
-digit-success
-digit-success
-encodeFormatTypePrime-success
-encodeFormatTypePrime-success
-encodeFormatTypePrime-success
-encodeFormatType-success
-stmtTerminator-success
-encodeFormat-success
-letter-success
-letter-success
-letter-success
-letter-success
-letter-success
-letter-success
-letter-success
-name-success
-letter-success
-letter-success
-letter-success
-name-success
-stmtTerminator-success
-outputFile-success
-Start-success
+Entering function: Start
+Entering function: encodeFile
+Entering function: name
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Leaving function: name (Success)
+Entering function: name
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Leaving function: name (Success)
+Entering function: stmtTerminator
+Leaving function: stmtTerminator (Success)
+Leaving function: encodeFile (Success)
+Entering function: lineFormat
+Entering function: lineFormatType
+Entering function: lineFormatTypePrime
+Entering function: lineFormatTypePrime
+Entering function: lineFormatTypePrime
+Entering function: lineFormatTypePrime
+Leaving function: lineFormatTypePrime (failed)
+Leaving function: lineFormatTypePrime (Success)
+Leaving function: lineFormatTypePrime (Success)
+Leaving function: lineFormatTypePrime (Success)
+Leaving function: lineFormatType (Success)
+Entering function: stmtTerminator
+Leaving function: stmtTerminator (Success)
+Leaving function: lineFormat (Success)
+Entering function: encodeFormat
+Entering function: encodeFormatType
+Entering function: encodeFormatTypePrime
+Entering function: digits
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Leaving function: digits (Success)
+Entering function: encodeFormatTypePrime
+Entering function: digits
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Leaving function: digits (Success)
+Entering function: encodeFormatTypePrime
+Entering function: digits
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Leaving function: digits (Success)
+Entering function: encodeFormatTypePrime
+Leaving function: encodeFormatTypePrime (failed)
+Leaving function: encodeFormatTypePrime (Success)
+Leaving function: encodeFormatTypePrime (Success)
+Leaving function: encodeFormatTypePrime (Success)
+Leaving function: encodeFormatType (Success)
+Entering function: stmtTerminator
+Leaving function: stmtTerminator (Success)
+Leaving function: encodeFormat (Success)
+Entering function: outputFile
+Entering function: name
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: letter
+Leaving function: letter (failed)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: letter
+Leaving function: letter (failed)
+Entering function: digit
+Leaving function: digit (failed)
+Entering function: letter
+Leaving function: letter (failed)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: letter
+Leaving function: letter (failed)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: letter
+Leaving function: letter (failed)
+Entering function: digit
+Leaving function: digit (failed)
+Entering function: letter
+Leaving function: letter (failed)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: letter
+Leaving function: letter (failed)
+Entering function: digit
+Leaving function: digit (Success)
+Leaving function: name (Success)
+Entering function: name
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Leaving function: name (Success)
+Entering function: stmtTerminator
+Leaving function: stmtTerminator (Success)
+Leaving function: outputFile (Success)
+Leaving function: Start (Success)

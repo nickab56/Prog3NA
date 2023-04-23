@@ -4,6 +4,19 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 
+/*
+ * Programmer Name: Nick Abegg
+ * Date Created: 4/9/2023
+ * Last Modified: 4/22/2023
+ * 
+ * Overview: This program takes in toxens from our lexical analyzer assignment output file and parses the program
+ *           to see if it is syntatically correct.
+ *           The program will ask you to enter the name of the file that contains the tokens. Ensure that the token file
+ *           is located in the same folder as the program. 
+ *           The program will output if the input tokens are successful or not and report where a failure/error has occured (if any).
+ * 
+ */
+
 public class Prog3NA
 {
     // instance variables - replace the example below with your own
@@ -13,11 +26,24 @@ public class Prog3NA
     
     private static String tempToken;
     
-    
+    /*
+     * Function Name: main
+     * Programmer: Nick Abegg
+     * Data Created: 4/9/2023
+     * Last Modified: 4/23/2023
+     * 
+     * Arguments: 
+     * 
+     * Returns: nothing
+     * Example: 
+     * Description: This function is the main function of the program. It will ask the user to input the name of the file
+     *              that contians the tokens. Then will call the Start grammar rule which will then parse through the entire input file of code to check
+     *              if it is syntatically correct.
+     */
     public static void main(String[] args)    
     {
         Scanner input = new Scanner(System.in); 
-        System.out.print("Enter the name of the .txt file that contains the code");
+        System.out.print("Enter the name of the .txt file that contains the code: ");
         String fileName = input.nextLine();
         String token;
         
@@ -54,11 +80,36 @@ public class Prog3NA
         
     }
     
+    /*
+     * Function Name: ReadToken
+     * Programmer: Nick Abegg
+     * Data Created: 4/9/2023
+     * Last Modified: 4/23/2023
+     * 
+     * Arguments: none
+     * 
+     * Returns: the next line or token in the input file
+     * Example: ReadToken()
+     * Description: Reads in the next line in the input file and returns that line as a string.
+     */
     public static String ReadToken()
     {
         return inStream.nextLine();
     }
     
+    /*
+     * Function Name: Start
+     * Programmer: Nick Abegg
+     * Data Created: 4/9/2023
+     * Last Modified: 4/23/2023
+     * 
+     * Arguments: token - a string that contains the current token
+     * 
+     * Returns: a bool value of true or false
+     * Example: Start(token)
+     * Description: This function represents the START grammar rule of the language. Calls the necessary rules and returns true if
+     *              the code is syntactially correct and false if not.
+     */
     public static boolean Start(String token)
     {
         System.out.println("Entering function: Start");
@@ -77,6 +128,19 @@ public class Prog3NA
         return false;
     }
     
+    /*
+     * Function Name: encodeFile
+     * Programmer: Nick Abegg
+     * Data Created: 4/9/2023
+     * Last Modified: 4/23/2023
+     * 
+     * Arguments: token - a string that contains the current token
+     * 
+     * Returns: returns a true or false bool value
+     * Example: encodeFile(token)
+     * Description: This function represents the ENCODE_FILE grammar rule of the language. Calls the necessary rules and returns true if
+     *              the code is syntactially correct and false if not.
+     */
     public static boolean encodeFile(String token)
     {
         System.out.println("Entering function: encodeFile");
@@ -95,6 +159,19 @@ public class Prog3NA
         return false;
     }
     
+    /*
+     * Function Name: name
+     * Programmer: Nick Abegg
+     * Data Created: 4/9/2023
+     * Last Modified: 4/23/2023
+     * 
+     * Arguments: token - a string that contains the current token
+     * 
+     * Returns: returns a true or false bool value
+     * Example: name(token)
+     * Description: this function checks to see if the given token is a valid value as described in the grammar.
+     *              Specifically, it checks to see if the given token has at least one letter and then any number of digits or letters after.
+     */
     public static boolean name(String token)
     {
         System.out.println("Entering function: name");
@@ -112,10 +189,14 @@ public class Prog3NA
         else
             {
                 int x = 0;
-                while (x < i)
+                if (letter(token.charAt(x)))
                 {
-                    letter(token.charAt(x));
-                    x++;
+                    while (x < i)
+                    {
+                        letter(token.charAt(x));
+                        digit(token.charAt(x));
+                        x++;
+                    }
                 }
                 System.out.println("Leaving function: name (Success)");
                 outStream.println("Leaving function: name (Success)");
@@ -126,6 +207,19 @@ public class Prog3NA
         return false;
     }
     
+    /*
+     * Function Name: lineFormat
+     * Programmer: Nick Abegg
+     * Data Created: 4/9/2023
+     * Last Modified: 4/23/2023
+     * 
+     * Arguments: token - a string that contains the current token
+     * 
+     * Returns: returns either a true or false bool value
+     * Example: lineFormat(token)
+     * Description: this is the function for the LINE_FORMAT grammar rule. Calls the necessary functions to check if the
+     *              language has the proper tokens for the LINE_FORMAT grammar rule.
+     */
     public static boolean lineFormat(String token)
     {
         System.out.println("Entering function: lineFormat");
@@ -146,6 +240,19 @@ public class Prog3NA
         return false;
     }
     
+    /*
+     * Function Name: encodeFormat
+     * Programmer: Nick Abegg
+     * Data Created: 4/9/2023
+     * Last Modified: 4/23/2023
+     * 
+     * Arguments: token - a string that contains the current token
+     * 
+     * Returns: returns a true or false bool value
+     * Example: encodeFormat(token)
+     * Description: This function checks the ENCODE_FORMAT grammar rule and calls the necessary functions to check if the language is
+     *              syntatically correct in respect to the grammar rule.
+     */
     public static boolean encodeFormat(String token)
     {
         System.out.println("Entering function: encodeFormat");
@@ -166,6 +273,19 @@ public class Prog3NA
         return false;
     }
     
+    /*
+     * Function Name: outputFile
+     * Programmer: Nick Abegg
+     * Data Created: 4/9/2023
+     * Last Modified: 4/23/2023
+     * 
+     * Arguments: token - a string that contains the current token
+     * 
+     * Returns: a true or false bool value
+     * Example: outputFile(token)
+     * Description: This function checks for the OUTPUT_FILE in the input code. Calls necessary functions to see if the OUTPUT_FILE grammar rule is
+     *              correct.
+     */
     public static boolean outputFile(String token)
     {
         System.out.println("Entering function: outputFile");
@@ -185,6 +305,19 @@ public class Prog3NA
         return false;
     }
     
+    /*
+     * Function Name: stmtTerminator
+     * Programmer: Nick Abegg
+     * Data Created: 4/9/2023
+     * Last Modified: 4/23/2023
+     * 
+     * Arguments: token - a string that contains the current token
+     * 
+     * Returns: return a true or false bool value
+     * Example: stmtTerminator(token)
+     * Description: Checks to see if current token is equal to the languages statement terminator. Ensures the language has correct syntax for the STMT_TERMINATOR
+     *              grammar rule.
+     */
     public static boolean stmtTerminator(String token)
     {
         System.out.println("Entering function: stmtTerminator");
@@ -200,6 +333,19 @@ public class Prog3NA
         return false;
     }
     
+    /*
+     * Function Name: lineFormatType
+     * Programmer: Nick Abegg
+     * Data Created: 4/9/2023
+     * Last Modified: 4/23/2023
+     * 
+     * Arguments: token - a string that contains the current token
+     * 
+     * Returns: retunrs either a true or false bool value
+     * Example: lineFormatType(token)
+     * Description: checks the LINE_FORMAT_TYPE grammar rule. Checks first for literal "string" or "number" then calls lineFormatTypePrime 
+     *              to check if there are more literal "string" or "number" tokens.
+     */
     public static boolean lineFormatType(String token)
     {
         System.out.println("Entering function: lineFormatType");
@@ -219,6 +365,19 @@ public class Prog3NA
     }
     
     
+    /*
+     * Function Name: lineFormatTypePrime
+     * Programmer: Nick Abegg
+     * Data Created: 4/9/2023
+     * Last Modified: 4/23/2023
+     * 
+     * Arguments: token - a string that contains the current token
+     * 
+     * Returns: either a true or false bool value
+     * Example: lineFormatTypePrime(token)
+     * Description: Used to fix the mutually disjoint. Checks to see for a comma and then a literal "string" or "number" string for any number
+     *              of times.
+     */
     public static boolean lineFormatTypePrime(String token)
     {
         System.out.println("Entering function: lineFormatTypePrime");
@@ -243,6 +402,20 @@ public class Prog3NA
     }
     
     
+    /*
+     * Function Name: encodeFormatType
+     * Programmer: Nick Abegg
+     * Data Created: 4/9/2023
+     * Last Modified: 4/23/2023
+     * 
+     * Arguments: token - a string that contains the current token
+     * 
+     * Returns: either a true or false bool value
+     * Example: encodeFormatType(token)
+     * Description: checks for literal "none" string or an op char followed by a number and then calls encodeFormatTypePrime
+     *              to fix the mutual disjointment of the grammar rule. 
+     *              
+     */
     public static boolean encodeFormatType(String token)
     {
         System.out.println("Entering function: encodeFormatType");
@@ -274,14 +447,39 @@ public class Prog3NA
         return false;
     }
     
+    /*
+     * Function Name: encodeFormatTypePrime
+     * Programmer: Nick Abegg
+     * Data Created: 4/9/2023
+     * Last Modified: 4/23/2023
+     * 
+     * Arguments: token - a string that contains the current token
+     * 
+     * Returns: returns either a true or false bool value
+     * Example: encodeFormatTypePrime(token)
+     * Description: Used to fix the mutual disjointment for the original grammar rule. Checks for any number of ',' followed by 
+     *              a literal "none" string or an op char followed by a number.
+     */
     public static boolean encodeFormatTypePrime(String token)
     {
         System.out.println("Entering function: encodeFormatTypePrime");
         outStream.println("Entering function: encodeFormatTypePrime");
         tempToken = token;
+        
         if (token.charAt(0) == ',')
             {
+                
                 token = ReadToken();
+                if (token.equals("none"))
+                {
+                    if (encodeFormatTypePrime(token = ReadToken()))
+                    {
+                            System.out.println("Leaving function: encodeFormatTypePrime (Success)");
+                            outStream.println("Leaving function: encodeFormatTypePrime (Success)");
+                            return true;                        
+                    }
+                }
+                
                 if (token.charAt(0) == '+' || token.charAt(0) == '-' || token.charAt(0) == '*')
                 {
                     if (digits(token = ReadToken()))
@@ -300,6 +498,18 @@ public class Prog3NA
         return true;
     }
     
+    /*
+     * Function Name:
+     * Programmer: Nick Abegg
+     * Data Created: 4/9/2023
+     * Last Modified: 4/23/2023
+     * 
+     * Arguments: token - a string that contains the current token
+     * 
+     * Returns: a true or false bool value
+     * Example: digits(token)
+     * Description: checks to see if the token is at least one digit long for the DIGITS grammar rule.
+     */
     public static boolean digits(String token)
     {
         System.out.println("Entering function: digits");
@@ -331,6 +541,18 @@ public class Prog3NA
         return false;
     }
     
+    /*
+     * Function Name:
+     * Programmer: Nick Abegg
+     * Data Created: 4/9/2023
+     * Last Modified: 4/23/2023
+     * 
+     * Arguments: token - a string that contains the current token
+     * 
+     * Returns: either a true or false bool value
+     * Example: letter(token)
+     * Description: Checks if the current token is a valid character that are defined in the LETTER grammar rule.
+     */
     public static boolean letter(char tokenChar)
     {
         System.out.println("Entering function: letter");
@@ -349,6 +571,18 @@ public class Prog3NA
         }
     }
     
+    /*
+     * Function Name:
+     * Programmer: Nick Abegg
+     * Data Created: 4/9/2023
+     * Last Modified: 4/23/2023
+     * 
+     * Arguments: token - a string that contains the current token
+     * 
+     * Returns: a true or false bool value
+     * Example: digit(token)
+     * Description: checks to see if the given token is a valid integer as defined in the languages DIGIT grammar rule.
+     */
     public static boolean digit(char tokenChar)
     {
         System.out.println("Entering function: digit");
