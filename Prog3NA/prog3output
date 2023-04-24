@@ -1,0 +1,68 @@
+Entering function: Start
+Entering function: encodeFile
+Entering function: name
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Leaving function: name (Success)
+Entering function: stmtTerminator
+Leaving function: stmtTerminator (Success)
+Leaving function: encodeFile (Success)
+Entering function: lineFormat
+Entering function: lineFormatType
+Entering function: lineFormatTypePrime
+Leaving function: lineFormatTypePrime (failed)
+Leaving function: lineFormatType (Success)
+Entering function: stmtTerminator
+Leaving function: stmtTerminator (Success)
+Leaving function: lineFormat (Success)
+Entering function: encodeFormat
+Entering function: encodeFormatType
+Entering function: encodeFormatTypePrime
+Leaving function: encodeFormatTypePrime (failed)
+Leaving function: encodeFormatType (Success)
+Entering function: stmtTerminator
+Leaving function: stmtTerminator (Success)
+Leaving function: encodeFormat (Success)
+Entering function: outputFile
+Entering function: name
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Leaving function: name (Success)
+Entering function: stmtTerminator
+Leaving function: stmtTerminator (Success)
+Leaving function: outputFile (Success)
+Leaving function: Start (Success)

@@ -1,0 +1,14 @@
+encode_file
+input.txt
+!
+line_format
+is
+string
+!
+encode_format
+is
+none
+!
+output_file
+output.txt
+!

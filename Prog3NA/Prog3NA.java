@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 /*
  * Programmer Name: Nick Abegg
  * Date Created: 4/9/2023
- * Last Modified: 4/23/2023
+ * Last Modified: 4/24/2023
  * 
  * Overview: This program takes in toxens from our lexical analyzer assignment output file and parses the program
  *           to see if it is syntatically correct.
@@ -17,6 +17,9 @@ import java.io.FileNotFoundException;
  *           
  *           Note: The ENCODE_FORMAT_TYPE and LINE_FORMAT_TYPE grammar rules were transformed so as to fix the disjointment and ensure
  *                 that the program is appropriate format for a recursive decent parser.
+ *                 
+ *                 Also, the grammar rules ENCODE_FILE, NAME, and OUTPUT_FILE have been updated on 4/24 to reflect an alteration to the grammar
+ *                 rules. This is done to simplify the original grammar rule.
  * 
  */
 
@@ -148,7 +151,7 @@ public class Prog3NA
      * Function Name: encodeFile
      * Programmer: Nick Abegg
      * Data Created: 4/9/2023
-     * Last Modified: 4/23/2023
+     * Last Modified: 4/24/2023
      * 
      * Arguments: token - a string that contains the current token
      * 
@@ -162,16 +165,15 @@ public class Prog3NA
         System.out.println("Entering function: encodeFile");
         outStream.println("Entering function: encodeFile");
         
-        if (name(token = ReadToken()))
-            if((token = ReadToken()).charAt(0) == '.')      // checking for literal '.' as described in the grammar rule
-                if (name(token = ReadToken()))
-                    if (stmtTerminator(token = ReadToken()))
-                    {
+        if ((token.equals("encode_file")))
+            if(name(token = ReadToken()))
+                if (stmtTerminator(token = ReadToken()))
+                {
                     System.out.println("Leaving function: encodeFile (Success)");
                     outStream.println("Leaving function: encodeFile (Success)");
                     return true;
-                    }
-                    
+                }
+                
         System.out.println("Leaving function: encodeFile (failed)");
         outStream.println("Leaving function: encodeFile (failed)");            
         return false;
@@ -181,7 +183,7 @@ public class Prog3NA
      * Function Name: name
      * Programmer: Nick Abegg
      * Data Created: 4/9/2023
-     * Last Modified: 4/23/2023
+     * Last Modified: 4/24/2023
      * 
      * Arguments: token - a string that contains the current token
      * 
@@ -189,6 +191,8 @@ public class Prog3NA
      * Example: name(token)
      * Description: this function checks to see if the given token is a valid value as described in the grammar.
      *              Specifically, it checks to see if the given token has at least one letter and then any number of digits or letters after.
+     *              
+     *              Note: Also checks for ' ' or '.' as a result of a alteration to the grammar rule on 4/24
      */
     public static boolean name(String token)
     {
@@ -209,11 +213,11 @@ public class Prog3NA
             {   // multiple characters in the name. Checks for both letter and digit as described by grammar rule
                 int x = 0;
                 if (letter(token.charAt(x)))
-                {
+                {   
                     while (x < i)
                     {
-                        letter(token.charAt(x));
-                        digit(token.charAt(x));
+                        if (!(token.charAt(x) == ' ' || token.charAt(x) == '.' || digit(token.charAt(x)) || letter(token.charAt(x))))
+                            return false;
                         x++;
                     }
                 }
@@ -301,7 +305,7 @@ public class Prog3NA
      * Function Name: outputFile
      * Programmer: Nick Abegg
      * Data Created: 4/9/2023
-     * Last Modified: 4/23/2023
+     * Last Modified: 4/24/2023
      * 
      * Arguments: token - a string that contains the current token
      * 
@@ -315,15 +319,14 @@ public class Prog3NA
         
         System.out.println("Entering function: outputFile");
         outStream.println("Entering function: outputFile");
-        if (name(token = ReadToken())){
-            if((token = ReadToken()).charAt(0) == '.')
-                if(name(token = ReadToken()))
-                    if(stmtTerminator(token = ReadToken()))
-                    {
-                        System.out.println("Leaving function: outputFile (Success)");
-                        outStream.println("Leaving function: outputFile (Success)");
-                        return true;
-                    }
+        
+        if (token.equals("output_file"))        //checks for literal string as described in grammar rule
+            if (name(token = ReadToken()))
+                if(stmtTerminator(token = ReadToken()))
+                {
+                    System.out.println("Leaving function: outputFile (Success)");
+                    outStream.println("Leaving function: outputFile (Success)");
+                    return true;
                 }
                 
         System.out.println("Leaving function: outputFile (failed)");
