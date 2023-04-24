@@ -7,13 +7,16 @@ import java.io.FileNotFoundException;
 /*
  * Programmer Name: Nick Abegg
  * Date Created: 4/9/2023
- * Last Modified: 4/22/2023
+ * Last Modified: 4/23/2023
  * 
  * Overview: This program takes in toxens from our lexical analyzer assignment output file and parses the program
  *           to see if it is syntatically correct.
  *           The program will ask you to enter the name of the file that contains the tokens. Ensure that the token file
  *           is located in the same folder as the program. 
  *           The program will output if the input tokens are successful or not and report where a failure/error has occured (if any).
+ *           
+ *           Note: The ENCODE_FORMAT_TYPE and LINE_FORMAT_TYPE grammar rules were transformed so as to fix the disjointment and ensure
+ *                 that the program is appropriate format for a recursive decent parser.
  * 
  */
 
@@ -42,9 +45,14 @@ public class Prog3NA
      */
     public static void main(String[] args)    
     {
+        // sets up input stream and gets the users input and output file names
         Scanner input = new Scanner(System.in); 
-        System.out.print("Enter the name of the .txt file that contains the code: ");
+        System.out.print("Enter the name of the file that contains the tokens: ");
         String fileName = input.nextLine();
+        
+        System.out.print("Enter the name of the output file: ");
+        String outName = input.nextLine();
+        
         String token;
         
         try
@@ -59,20 +67,26 @@ public class Prog3NA
         } // end catch
         try
         {
-          outStream = new PrintWriter("Prog3OutNA.txt");     
+          outStream = new PrintWriter(outName);     
         } // end try
         catch(FileNotFoundException e)
         {
-            System.out.println("error opening the file" + fileName);
+            System.out.println("error opening the file" + outName);
             System.exit(0);
         } // end catch
         
+        System.out.println("Checking " + fileName + " now!");
+        System.out.println("Enter any value to continue: ");
+        
+        input.nextLine();
+        
+        // reads the first token and calls the START grammar rule
         token = ReadToken();
     
         if (Start(token))
-            System.out.println("Successful Program");
+            System.out.println("Successful Program! The program is legal!");
         else
-            System.out.println("Not Successful Program");
+            System.out.println("Unsuccessful parse attempt. The input file " + fileName + " did not parse successfully and is not a legal program.");
         
     // then close the files
     outStream.close();
@@ -114,8 +128,9 @@ public class Prog3NA
     {
         System.out.println("Entering function: Start");
         outStream.println("Entering function: Start");
+        
         if (encodeFile(token))
-            if (lineFormat(token = ReadToken()))
+            if (lineFormat(token = ReadToken()))            // here i am calling a grammar rule and at the same time reading in the next token
                 if (encodeFormat(token = ReadToken()))
                     if (outputFile(token = ReadToken()))
                     {
@@ -123,6 +138,7 @@ public class Prog3NA
                     outStream.println("Leaving function: Start (Success)");
                     return true;
                     }
+                    
         System.out.println("Leaving function: Start (failed)");
         outStream.println("Leaving function: Start (failed)"); 
         return false;
@@ -145,8 +161,9 @@ public class Prog3NA
     {
         System.out.println("Entering function: encodeFile");
         outStream.println("Entering function: encodeFile");
+        
         if (name(token = ReadToken()))
-            if((token = ReadToken()).charAt(0) == '.')
+            if((token = ReadToken()).charAt(0) == '.')      // checking for literal '.' as described in the grammar rule
                 if (name(token = ReadToken()))
                     if (stmtTerminator(token = ReadToken()))
                     {
@@ -154,6 +171,7 @@ public class Prog3NA
                     outStream.println("Leaving function: encodeFile (Success)");
                     return true;
                     }
+                    
         System.out.println("Leaving function: encodeFile (failed)");
         outStream.println("Leaving function: encodeFile (failed)");            
         return false;
@@ -177,7 +195,8 @@ public class Prog3NA
         System.out.println("Entering function: name");
         outStream.println("Entering function: name");
         int i = token.length();
-        if (i == 1)
+        
+        if (i == 1)     // if just 1 we don't need a loop
         {
             if (letter(token.charAt(0)))
             {
@@ -187,7 +206,7 @@ public class Prog3NA
             }
         }
         else
-            {
+            {   // multiple characters in the name. Checks for both letter and digit as described by grammar rule
                 int x = 0;
                 if (letter(token.charAt(x)))
                 {
@@ -202,6 +221,7 @@ public class Prog3NA
                 outStream.println("Leaving function: name (Success)");
                 return true;
             }
+            
         System.out.println("Leaving function: name (failed)");
         outStream.println("Leaving function: name (failed)");
         return false;
@@ -224,6 +244,7 @@ public class Prog3NA
     {
         System.out.println("Entering function: lineFormat");
         outStream.println("Entering function: lineFormat");
+        
         if (token.equals("line_format"))
             if ((token = ReadToken()).equals("is"))
                 if (lineFormatType(token = ReadToken()))
@@ -235,6 +256,7 @@ public class Prog3NA
                         return true;
                     }
                 }
+                
         System.out.println("Leaving function: lineFormat (failed)");
         outStream.println("Leaving function: lineFormat (failed)");        
         return false;
@@ -257,6 +279,7 @@ public class Prog3NA
     {
         System.out.println("Entering function: encodeFormat");
         outStream.println("Entering function: encodeFormat");
+        
         if (token.equals("encode_format"))
             if((token = ReadToken()).equals("is"))
                 if (encodeFormatType(token = ReadToken()))
@@ -268,6 +291,7 @@ public class Prog3NA
                         return true;
                     }
                 }
+                
         System.out.println("Leaving function: encodeFormat (failed)");
         outStream.println("Leaving function: encodeFormat (failed)");        
         return false;
@@ -288,6 +312,7 @@ public class Prog3NA
      */
     public static boolean outputFile(String token)
     {
+        
         System.out.println("Entering function: outputFile");
         outStream.println("Entering function: outputFile");
         if (name(token = ReadToken())){
@@ -300,6 +325,7 @@ public class Prog3NA
                         return true;
                     }
                 }
+                
         System.out.println("Leaving function: outputFile (failed)");
         outStream.println("Leaving function: outputFile (failed)");
         return false;
@@ -321,13 +347,15 @@ public class Prog3NA
     public static boolean stmtTerminator(String token)
     {
         System.out.println("Entering function: stmtTerminator");
-        outStream.println("Entering function: stmtTerminator");    
+        outStream.println("Entering function: stmtTerminator");   
+        
         if (token.charAt(0) == '!')
         {
             System.out.println("Leaving function: stmtTerminator (Success)");
             outStream.println("Leaving function: stmtTerminator (Success)");
             return true;
         }
+        
         System.out.println("Leaving function: stmtTerminator (failed)");
         outStream.println("Leaving function: stmtTerminator (failed)");
         return false;
@@ -350,15 +378,17 @@ public class Prog3NA
     {
         System.out.println("Entering function: lineFormatType");
         outStream.println("Entering function: lineFormatType");
+        
         if (token.equals("string") || token.equals("number"))
         {
-            if (lineFormatTypePrime(token = ReadToken()))
+            if (lineFormatTypePrime(token = ReadToken()))           // calls prime to fix the disjointness of original grammar rule
             {
                 System.out.println("Leaving function: lineFormatType (Success)");
                 outStream.println("Leaving function: lineFormatType (Success)");
                 return true;
             }
         }
+        
         System.out.println("Leaving function: lineFormatType (failed)");
         outStream.println("Leaving function: lineFormatType (failed)");
         return false;
@@ -420,7 +450,8 @@ public class Prog3NA
     {
         System.out.println("Entering function: encodeFormatType");
         outStream.println("Entering function: encodeFormatType");
-        if (token.equals("none"))
+        
+        if (token.equals("none"))   // checks for just literal 'none'
         {
             if (encodeFormatTypePrime(token = ReadToken()))
                 {
@@ -430,6 +461,7 @@ public class Prog3NA
                 }
         }
         
+        // checks for ops and digit and calls prime again to check for more
         if (token.charAt(0) == '+' || token.charAt(0) == '-' || token.charAt(0) == '*')
         {
             if (digits(token = ReadToken()))
@@ -442,6 +474,7 @@ public class Prog3NA
                 }
             }
         }
+        
         System.out.println("Leaving function: encodeFormatType (failed)");
         outStream.println("Leaving function: encodeFormatType (failed)");
         return false;
@@ -466,13 +499,14 @@ public class Prog3NA
         outStream.println("Entering function: encodeFormatTypePrime");
         tempToken = token;
         
+        // checks for literal ','
         if (token.charAt(0) == ',')
             {
                 
                 token = ReadToken();
                 if (token.equals("none"))
                 {
-                    if (encodeFormatTypePrime(token = ReadToken()))
+                    if (encodeFormatTypePrime(token = ReadToken()))     // calls again to see if there are more and fix disjointness
                     {
                             System.out.println("Leaving function: encodeFormatTypePrime (Success)");
                             outStream.println("Leaving function: encodeFormatTypePrime (Success)");
@@ -480,6 +514,7 @@ public class Prog3NA
                     }
                 }
                 
+                // checks for ops and digits following. then calls prime again to check for more.
                 if (token.charAt(0) == '+' || token.charAt(0) == '-' || token.charAt(0) == '*')
                 {
                     if (digits(token = ReadToken()))
@@ -493,6 +528,7 @@ public class Prog3NA
                     }
                 }
             }
+            
         System.out.println("Leaving function: encodeFormatTypePrime (failed)");
         outStream.println("Leaving function: encodeFormatTypePrime (failed)");
         return true;
@@ -514,7 +550,8 @@ public class Prog3NA
     {
         System.out.println("Entering function: digits");
         outStream.println("Entering function: digits");
-        int i = token.length();
+        
+        int i = token.length(); // if just 1 no need for loop
         if (i == 1)
         {
             if (digit(token.charAt(0)))
@@ -525,17 +562,20 @@ public class Prog3NA
             }
         }
         else
-            {
+            {   
+                // more than 1 so will loop through all digits in the number
                 int x = 0;
                 while (x < i)
                 {
                     digit((token.charAt(x)));
                     x++;
                 }
+                
                 System.out.println("Leaving function: digits (Success)");
                 outStream.println("Leaving function: digits (Success)");
                 return true;
             }
+            
         System.out.println("Leaving function: digits (failed)");
         outStream.println("Leaving function: digits (failed)");
         return false;
@@ -557,6 +597,8 @@ public class Prog3NA
     {
         System.out.println("Entering function: letter");
         outStream.println("Entering function: letter");
+        
+        // checks if a valid letter in the alphabet as described in the grammar rule
         if (Character.isAlphabetic(tokenChar))
         {
             System.out.println("Leaving function: letter (Success)");
@@ -569,6 +611,7 @@ public class Prog3NA
             outStream.println("Leaving function: letter (failed)");
             return false;
         }
+        
     }
     
     /*
@@ -587,6 +630,8 @@ public class Prog3NA
     {
         System.out.println("Entering function: digit");
         outStream.println("Entering function: digit");
+        
+        // similar to letter. Checks if the token is a valid integer as defined in the grammar rule
         int tokenInt = Character.getNumericValue(tokenChar);
         if (tokenInt >= 0)
         {
