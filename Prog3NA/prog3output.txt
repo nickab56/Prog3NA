@@ -3,22 +3,22 @@ Entering function: encodeFile
 Entering function: name
 Entering function: letter
 Leaving function: letter (Success)
-Entering function: letter
-Leaving function: letter (Success)
-Entering function: letter
-Leaving function: letter (Success)
-Entering function: letter
-Leaving function: letter (Success)
-Entering function: letter
-Leaving function: letter (Success)
-Entering function: letter
-Leaving function: letter (Success)
-Entering function: letter
-Leaving function: letter (Success)
-Entering function: letter
-Leaving function: letter (Success)
-Entering function: letter
-Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
 Leaving function: name (Success)
 Entering function: stmtTerminator
 Leaving function: stmtTerminator (Success)
@@ -43,24 +43,24 @@ Entering function: outputFile
 Entering function: name
 Entering function: letter
 Leaving function: letter (Success)
-Entering function: letter
-Leaving function: letter (Success)
-Entering function: letter
-Leaving function: letter (Success)
-Entering function: letter
-Leaving function: letter (Success)
-Entering function: letter
-Leaving function: letter (Success)
-Entering function: letter
-Leaving function: letter (Success)
-Entering function: letter
-Leaving function: letter (Success)
-Entering function: letter
-Leaving function: letter (Success)
-Entering function: letter
-Leaving function: letter (Success)
-Entering function: letter
-Leaving function: letter (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
+Entering function: digit
+Leaving function: digit (Success)
 Leaving function: name (Success)
 Entering function: stmtTerminator
 Leaving function: stmtTerminator (Success)

@@ -1,0 +1,20 @@
+Entering function: Start
+Entering function: encodeFile
+Entering function: name
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Entering function: letter
+Leaving function: letter (Success)
+Leaving function: name (Success)
+Entering function: stmtTerminator
+Leaving function: stmtTerminator (failed)
+Leaving function: encodeFile (failed)
+Leaving function: Start (failed)
