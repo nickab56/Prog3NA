@@ -19,3 +19,5 @@
  */
 
 NOTE: This program was created for my Programming Languages Course during my Spring Semester of 2023.
+
+A simple tokenizer for a very simple grammar.
